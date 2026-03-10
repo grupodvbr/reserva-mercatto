@@ -615,22 +615,35 @@ const {error}=await supabaseClient
 .from("reservas_mercatto")
 .insert({
 
-nome:f.get("nome"),
-telefone:f.get("telefone"),
-pessoas:Number(f.get("pessoas")),
-datahora:datahora,
+nome: f.get("nome"),
 
-area_externa:f.get("area"),
-comandas_individuais:f.get("comanda"),
+email: "",
 
-ocasiao:f.get("ocasiao"),
-decoracao:f.get("decoracao"),
+telefone: f.get("telefone"),
 
-status:"Pendente",
-origem:"Site Reserva"
+pessoas: Number(f.get("pessoas")),
+
+mesa: f.get("area") === "Sim" ? "Área Externa" : "Salão",
+
+cardapio: "",
+
+comandaIndividual: f.get("comanda"),
+
+datahora: datahora,
+
+observacoes:
+"Ocasião: " + (f.get("ocasiao") || "—") +
+" | Decoração: " + (f.get("decoracao") || "—"),
+
+valorEstimado: 0,
+
+pagamentoAntecipado: 0,
+
+banco: "",
+
+status: "Pendente"
 
 })
-
 if(error){
 
 alert("Erro ao registrar reserva")
