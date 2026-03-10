@@ -21,415 +21,221 @@ viewport-fit=cover">
 <style>
 
 :root{
-
 --bg:#070b14;
 --card:#0f1625;
 --line:#1f2937;
-
 --text:#f1f5f9;
 --muted:#94a3b8;
-
 --brand:#22c55e;
 --brand-dark:#16a34a;
-
 --gold:#ffd700;
-
 --radius:20px;
-
 }
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-
 margin:0;
-
 font-family:Inter,sans-serif;
-
 background:radial-gradient(circle at top,#0f172a,#020617 70%);
-
 color:var(--text);
-
 min-height:100vh;
-
 overflow-x:hidden;
-
 }
 
 /* HERO */
 
 header{
-
 padding:28px 16px;
-
 }
 
 .hero{
-
 max-width:820px;
 margin:auto;
 position:relative;
-
 border-radius:26px;
 overflow:hidden;
-
-box-shadow:
-0 40px 80px rgba(0,0,0,.8);
-
+box-shadow:0 40px 80px rgba(0,0,0,.8);
 }
 
-/* VIDEO HERO */
-
-.hero video,
-.hero img{
-
+.hero video{
 width:100%;
 height:100%;
 object-fit:cover;
 display:block;
-
 }
-
-/* OVERLAY */
 
 .hero::after{
-
 content:"";
-
 position:absolute;
 inset:0;
-
-background:
-linear-gradient(
-180deg,
-transparent,
-rgba(0,0,0,.6)
-);
-
+background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));
 }
 
-/* ACTIONS */
+/* BOTÕES */
 
 .actions{
-
 max-width:820px;
 margin:22px auto;
-
 display:flex;
 gap:12px;
 flex-wrap:wrap;
-
 }
 
 .btn{
-
 flex:1;
-
 padding:16px;
-
 border-radius:16px;
-
 font-weight:800;
 font-size:14px;
-
 border:1px solid var(--line);
-
 background:#111827;
-
 color:white;
-
 cursor:pointer;
-
 display:flex;
 justify-content:center;
 align-items:center;
 gap:8px;
-
 transition:.2s;
-
-box-shadow:
-0 8px 20px rgba(0,0,0,.5);
-
+box-shadow:0 8px 20px rgba(0,0,0,.5);
 }
 
 .btn:hover{
-
 transform:translateY(-2px);
-
 background:#1f2937;
-
 }
-
-/* WHATSAPP */
 
 .btn.whatsapp{
-
-background:linear-gradient(
-180deg,
-var(--brand),
-var(--brand-dark)
-);
-
+background:linear-gradient(180deg,var(--brand),var(--brand-dark));
 border:none;
-
 }
-
-/* RESERVAR */
 
 .btn.reservar{
-
-background:
-linear-gradient(
-145deg,
-#ffd700,
-#ffb700,
-#ff8c00
-);
-
+background:linear-gradient(145deg,#ffd700,#ffb700,#ff8c00);
 border:none;
-
 color:#2b1a00;
-
 font-weight:900;
-
-box-shadow:
-0 0 20px rgba(255,215,0,.5),
-0 10px 25px rgba(0,0,0,.6);
-
-}
-
-.btn.reservar:hover{
-
-transform:translateY(-3px) scale(1.02);
-
+box-shadow:0 0 20px rgba(255,215,0,.5);
 }
 
 /* MODAL */
 
 dialog{
-
 width:100%;
 max-width:620px;
-
 border:none;
-
 border-radius:26px;
-
-background:
-linear-gradient(
-180deg,
-#111827,
-#020617
-);
-
+background:linear-gradient(180deg,#111827,#020617);
 color:white;
-
 overflow:hidden;
-
-box-shadow:
-0 60px 120px rgba(0,0,0,.9);
-
+box-shadow:0 60px 120px rgba(0,0,0,.9);
 animation:modal .25s ease;
-
 }
 
 @keyframes modal{
-
-from{
-transform:translateY(60px);
-opacity:0;
-}
-
-to{
-transform:translateY(0);
-opacity:1;
-}
-
+from{transform:translateY(60px);opacity:0;}
+to{transform:translateY(0);opacity:1;}
 }
 
 dialog::backdrop{
-
 background:rgba(0,0,0,.8);
 backdrop-filter:blur(6px);
-
 }
 
-/* HEAD */
-
 .modal-head{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-
 padding:22px;
-
 border-bottom:1px solid var(--line);
-
 font-weight:900;
-
 font-size:16px;
-
 }
 
-/* BODY */
-
 .modal-body{
-
 padding:26px;
-
 max-height:80vh;
 overflow-y:auto;
-
 }
 
-/* esconder scrollbar */
-
-.modal-body::-webkit-scrollbar{
-width:0;
-}
-
-.modal-body{
-scrollbar-width:none;
-}
+.modal-body::-webkit-scrollbar{width:0}
+.modal-body{scrollbar-width:none}
 
 /* FORM */
 
-form{
-
-display:grid;
-gap:18px;
-
-}
+form{display:grid;gap:18px}
 
 .row{
-
 display:grid;
 grid-template-columns:1fr 1fr;
-
 gap:14px;
-
 }
 
 @media(max-width:650px){
-
-.row{
-grid-template-columns:1fr;
-}
-
+.row{grid-template-columns:1fr}
 }
 
 label{
-
 font-size:12px;
 font-weight:800;
-
 color:var(--muted);
-
 }
 
 input,select{
-
 width:100%;
-
 padding:15px;
-
 border-radius:14px;
-
 border:1px solid var(--line);
-
 background:#020617;
-
 color:white;
-
 font-size:14px;
-
-transition:.2s;
-
 }
 
-input:focus,
-select:focus{
+input::placeholder{
+color:#6b7280;
+}
 
+input:focus,select:focus{
 outline:none;
-
 border-color:var(--brand);
-
-box-shadow:
-0 0 0 2px rgba(34,197,94,.25);
-
+box-shadow:0 0 0 2px rgba(34,197,94,.25);
 }
 
 /* TERMOS */
 
 .termos{
-
 display:flex;
 gap:12px;
-
 font-size:13px;
-
 color:#cbd5f5;
-
 align-items:flex-start;
-
 }
 
 .termos input{
-
 width:18px;
 height:18px;
-
 accent-color:var(--brand);
-
 cursor:pointer;
-
 }
 
 /* BOTÃO */
 
 .submit{
-
-background:linear-gradient(
-180deg,
-var(--brand),
-var(--brand-dark)
-);
-
+background:linear-gradient(180deg,var(--brand),var(--brand-dark));
 border:none;
-
 padding:18px;
-
 border-radius:16px;
-
 font-weight:900;
 font-size:16px;
-
 cursor:pointer;
-
-transition:.2s;
-
-box-shadow:
-0 12px 30px rgba(0,0,0,.6);
-
+box-shadow:0 12px 30px rgba(0,0,0,.6);
 }
-
-.submit:hover{
-
-transform:translateY(-2px);
-
-}
-
-/* BLOQUEIO DE SCROLL */
 
 body.modal-open{
 overflow:hidden;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -438,15 +244,9 @@ overflow:hidden;
 
 <div class="hero">
 
-<!-- VIDEO HERO -->
-<video
-autoplay
-loop
-muted
-playsinline
-poster="https://raw.githubusercontent.com/grupodvbr/aniversariosmercatto/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-27%20%C3%A0(s)%2010.13.55_d0cbe205.jpg">
+<video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/grupodvbr/aniversariosmercatto/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-27%20%C3%A0(s)%2010.13.55_d0cbe205.jpg">
 
-<source src="COLOQUE_AQUI_SEU_VIDEO.mp4" type="video/mp4">
+<source src="COLOQUE_SEU_VIDEO.mp4" type="video/mp4">
 
 </video>
 
@@ -478,16 +278,16 @@ poster="https://raw.githubusercontent.com/grupodvbr/aniversariosmercatto/main/pa
 <form id="formReserva">
 
 <label>Nome</label>
-<input name="nome" required>
+<input name="nome" required placeholder="Ex: João Silva">
 
 <label>Contato</label>
-<input id="telefone" name="telefone" required placeholder="(77) 9 0000-0000">
+<input id="telefone" name="telefone" required placeholder="Ex: (77) 9 9999-9999">
 
 <div class="row">
 
 <div>
 <label>Nº de Pessoas</label>
-<input type="number" name="pessoas" min="1" required>
+<input type="number" name="pessoas" min="1" required placeholder="Ex: 4">
 </div>
 
 <div>
@@ -526,13 +326,13 @@ poster="https://raw.githubusercontent.com/grupodvbr/aniversariosmercatto/main/pa
 
 <div>
 <label>Ocasião</label>
-<input name="ocasiao">
+<input name="ocasiao" placeholder="Ex: Aniversário, jantar romântico, reunião...">
 </div>
 
 </div>
 
 <label>Decoração</label>
-<input name="decoracao">
+<input name="decoracao" placeholder="Ex: Balões, bolo surpresa...">
 
 <div class="termos">
 
@@ -540,9 +340,7 @@ poster="https://raw.githubusercontent.com/grupodvbr/aniversariosmercatto/main/pa
 
 <span>
 Li e concordo com os
-<button type="button" id="abrirTermos">
-Termos da Reserva
-</button>
+<button type="button" id="abrirTermos">Termos da Reserva</button>
 </span>
 
 </div>
@@ -560,21 +358,15 @@ Confirmar Reserva
 <dialog id="modalTermos">
 
 <div class="modal-head">
-
 📜 Termos da Reserva
-
 <button onclick="modalTermos.close()">Fechar</button>
-
 </div>
 
 <div class="modal-body">
 
 <p>• A reserva será mantida por até <b>20 minutos</b> após o horário.</p>
-
 <p>• Após esse período a mesa pode ser liberada.</p>
-
 <p>• Taxa de serviço de <b>10%</b> aplicada.</p>
-
 <p>• Não é permitido confete, vela vulcão ou itens perigosos.</p>
 
 </div>
@@ -586,34 +378,22 @@ Confirmar Reserva
 const SUPABASE_URL="https://dxkszikemntfusfyrzos.supabase.co"
 const SUPABASE_KEY="sb_publishable_NNFvdfSXgOdGGVcSbphbjQ_brC3_9ed"
 
-const supabaseClient=supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-)
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
 
 const modal=document.getElementById("modalReserva")
 
 btnReservar.onclick=()=>{
-
 modal.showModal()
 document.body.classList.add("modal-open")
-
 }
 
 fecharModal.onclick=()=>{
-
 modal.close()
 document.body.classList.remove("modal-open")
-
 }
 
 btnWhats.onclick=()=>{
-
-window.open(
-"https://wa.me/557736135148",
-"_blank"
-)
-
+window.open("https://wa.me/557736135148","_blank")
 }
 
 /* HORÁRIOS */
@@ -623,40 +403,24 @@ dataReserva.addEventListener("change",()=>{
 horaReserva.innerHTML='<option value="">Selecione</option>'
 
 const d=new Date(dataReserva.value)
-
 const dia=d.getDay()
 
 let h=[]
 
 if(dia>=1 && dia<=4){
-
-for(let i=11;i<=15;i++){
-h.push(i+":00",i+":30")
-}
-
-for(let i=17;i<=22;i++){
-h.push(i+":00",i+":30")
-}
-
+for(let i=11;i<=15;i++){h.push(i+":00",i+":30")}
+for(let i=17;i<=22;i++){h.push(i+":00",i+":30")}
 }
 
 if(dia==5||dia==6||dia==0){
-
-for(let i=11;i<=22;i++){
-h.push(i+":00",i+":30")
-}
-
+for(let i=11;i<=22;i++){h.push(i+":00",i+":30")}
 }
 
 h.forEach(t=>{
-
 const o=document.createElement("option")
-
 o.value=t
 o.textContent=t
-
 horaReserva.appendChild(o)
-
 })
 
 })
@@ -670,7 +434,6 @@ let v=e.target.value.replace(/\D/g,"")
 if(v.length>11)v=v.slice(0,11)
 
 v=v.replace(/^(\d{2})(\d)/,"($1) $2")
-
 v=v.replace(/(\d)(\d{4})$/,"$1-$2")
 
 e.target.value=v
@@ -688,11 +451,8 @@ formReserva.onsubmit=async e=>{
 e.preventDefault()
 
 if(!aceitarTermos.checked){
-
 alert("Você precisa aceitar os termos.")
-
 return
-
 }
 
 const f=new FormData(formReserva)
@@ -706,42 +466,27 @@ const {error}=await supabaseClient
 .from("reservas_mercatto")
 .insert({
 
-nome: f.get("nome"),
-
-email: "",
-
-telefone: f.get("telefone"),
-
-pessoas: Number(f.get("pessoas")),
-
-mesa: f.get("area") === "Sim" ? "Área Externa" : "Salão",
-
-cardapio: "",
-
-comandaIndividual: f.get("comanda"),
-
-datahora: datahora,
-
+nome:f.get("nome"),
+email:"",
+telefone:f.get("telefone"),
+pessoas:Number(f.get("pessoas")),
+mesa:f.get("area")==="Sim"?"Área Externa":"Salão",
+cardapio:"",
+comandaIndividual:f.get("comanda"),
+datahora:datahora,
 observacoes:
-"Ocasião: " + (f.get("ocasiao") || "—") +
-" | Decoração: " + (f.get("decoracao") || "—"),
-
-valorEstimado: 0,
-
-pagamentoAntecipado: 0,
-
-banco: "",
-
-status: "Pendente"
+"Ocasião: "+(f.get("ocasiao")||"—")+
+" | Decoração: "+(f.get("decoracao")||"—"),
+valorEstimado:0,
+pagamentoAntecipado:0,
+banco:"",
+status:"Pendente"
 
 })
 
 if(error){
-
 alert("Erro ao registrar reserva")
-
 return
-
 }
 
 alert("Reserva registrada!")
