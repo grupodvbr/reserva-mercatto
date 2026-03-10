@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+
+<title>Reservas • Mercatto Delícia</title>
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1,
+maximum-scale=1,
+user-scalable=no,
+viewport-fit=cover">
+
+<meta name="color-scheme" content="dark">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root{
+
+--bg:#0b1220;
+--card:#111827;
+--line:#1f2937;
+
+--text:#e5e7eb;
+--muted:#9ca3af;
+
+--brand:#22c55e;
+--brand-dark:#16a34a;
+
+--gold:#ffd700;
+
+--radius:16px;
+
+}
+
+*{box-sizing:border-box}
+
+body{
+
+margin:0;
+
+font-family:Inter,sans-serif;
+
+background:
+
+radial-gradient(circle at top,#101722,#0b1220 70%);
+
+color:var(--text);
+
+min-height:100vh;
+
+}
+
+/* HERO */
+
+header{
+
+padding:22px 16px;
+
+}
+
+.hero{
+
+max-width:820px;
+
+margin:auto;
+
+}
+
+.hero-img{
+
+width:100%;
+
+border-radius:20px;
+
+box-shadow:0 25px 50px rgba(0,0,0,.7);
+
+display:block;
+
+}
+
+/* BOTÕES */
+
+.actions{
+
+max-width:820px;
+
+margin:16px auto;
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+}
+
+.btn{
+
+flex:1;
+
+padding:14px;
+
+border-radius:14px;
+
+font-weight:800;
+
+font-size:14px;
+
+border:1px solid var(--line);
+
+background:#131a2a;
+
+color:white;
+
+cursor:pointer;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:6px;
+
+transition:.15s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-1px);
+
+}
+
+.btn.whatsapp{
+
+background:linear-gradient(180deg,var(--brand),var(--brand-dark));
+
+border:none;
+
+}
+
+.btn.reservar{
+
+background:linear-gradient(145deg,#ffd700,#ffb700,#ff8c00);
+
+border:none;
+
+color:#2b1a00;
+
+font-weight:900;
+
+}
+
+/* MODAL */
+
+dialog{
+
+width:100%;
+
+max-width:600px;
+
+border:none;
+
+border-radius:22px;
+
+background:var(--card);
+
+color:white;
+
+overflow:hidden;
+
+animation:modal .2s ease;
+
+}
+
+@keyframes modal{
+
+from{transform:translateY(40px);opacity:.5}
+to{transform:translateY(0);opacity:1}
+
+}
+
+.modal-head{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px;
+
+border-bottom:1px solid var(--line);
+
+font-weight:900;
+
+font-size:15px;
+
+}
+
+.modal-body{
+
+padding:22px;
+
+max-height:75vh;
+
+overflow:auto;
+
+}
+
+/* FORM */
+
+form{
+
+display:grid;
+
+gap:16px;
+
+}
+
+.row{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+}
+
+@media(max-width:650px){
+
+.row{grid-template-columns:1fr}
+
+}
+
+label{
+
+font-size:13px;
+
+font-weight:700;
+
+margin-bottom:4px;
+
+display:block;
+
+}
+
+input,select{
+
+width:100%;
+
+padding:13px;
+
+border-radius:12px;
+
+border:1px solid var(--line);
+
+background:#0b1220;
+
+color:white;
+
+font-size:14px;
+
+}
+
+input:focus,select:focus{
+
+outline:none;
+
+border-color:var(--brand);
+
+box-shadow:0 0 0 2px rgba(34,197,94,.2);
+
+}
+
+/* CHECKBOX TERMOS */
+
+.termos{
+
+display:flex;
+
+gap:10px;
+
+font-size:13px;
+
+color:#ddd;
+
+align-items:flex-start;
+
+}
+
+.termos input{
+
+width:18px;
+
+height:18px;
+
+accent-color:var(--brand);
+
+cursor:pointer;
+
+}
+
+/* BOTÃO */
+
+.submit{
+
+background:linear-gradient(180deg,var(--brand),var(--brand-dark));
+
+border:none;
+
+padding:16px;
+
+border-radius:14px;
+
+font-weight:900;
+
+font-size:15px;
+
+cursor:pointer;
+
+margin-top:4px;
+
+}
+
+.submit:hover{
+
+transform:translateY(-1px);
+
+}
+
+/* TERMOS MODAL */
+
+#modalTermos{
+
+max-width:520px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="hero">
+
+<img class="hero-img"
+
+src="https://raw.githubusercontent.com/grupodvbr/aniversariosmercatto/main/paste/Imagem%20do%20WhatsApp%20de%202025-08-27%20%C3%A0(s)%2010.13.55_d0cbe205.jpg">
+
+</div>
+
+<div class="actions">
+
+<button id="btnReservar" class="btn reservar">
+
+🗓️ Fazer Reserva
+
+</button>
+
+<button id="btnWhats" class="btn whatsapp">
+
+💬 WhatsApp
+
+</button>
+
+</div>
+
+</header>
+
+<dialog id="modalReserva">
+
+<div class="modal-head">
+
+📅 Nova Reserva
+
+<button id="fecharModal">Fechar</button>
+
+</div>
+
+<div class="modal-body">
+
+<form id="formReserva">
+
+<label>Nome</label>
+<input name="nome" required>
+
+<label>Contato</label>
+<input id="telefone" name="telefone" required placeholder="(77) 9 0000-0000">
+
+<div class="row">
+
+<div>
+<label>Nº de Pessoas</label>
+<input type="number" name="pessoas" min="1" required>
+</div>
+
+<div>
+<label>Área Externa (Fora)</label>
+<select name="area">
+<option>Não</option>
+<option>Sim</option>
+</select>
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
+<label>Data</label>
+<input type="date" id="dataReserva" required>
+</div>
+
+<div>
+<label>Horário</label>
+<select id="horaReserva" required></select>
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
+<label>Comandas Individuais</label>
+<select name="comanda">
+<option>Não</option>
+<option>Sim</option>
+</select>
+</div>
+
+<div>
+<label>Ocasião</label>
+<input name="ocasiao" placeholder="Aniversário, jantar…">
+</div>
+
+</div>
+
+<label>Decoração</label>
+<input name="decoracao" placeholder="Balões, bolo…">
+
+<div class="termos">
+
+<input type="checkbox" id="aceitarTermos">
+
+<span>
+
+Li e concordo com os
+
+<button type="button" id="abrirTermos">Termos da Reserva</button>
+
+</span>
+
+</div>
+
+<button class="submit">
+
+Confirmar Reserva
+
+</button>
+
+</form>
+
+</div>
+
+</dialog>
+
+<dialog id="modalTermos">
+
+<div class="modal-head">
+
+📜 Termos da Reserva
+
+<button onclick="modalTermos.close()">Fechar</button>
+
+</div>
+
+<div class="modal-body">
+
+<p>• A reserva será mantida por até <b>20 minutos</b> após o horário.</p>
+
+<p>• Após esse período a mesa pode ser liberada.</p>
+
+<p>• Taxa de serviço de <b>10%</b> aplicada.</p>
+
+<p>• Não é permitido confete, vela vulcão ou itens perigosos.</p>
+
+</div>
+
+</dialog>
+
+<script>
+
+const SUPABASE_URL="https://dxkszikemntfusfyrzos.supabase.co"
+const SUPABASE_KEY="sb_publishable_NNFvdfSXgOdGGVcSbphbjQ_brC3_9ed"
+
+const supabaseClient=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+)
+
+const modal=document.getElementById("modalReserva")
+
+btnReservar.onclick=()=>modal.showModal()
+
+fecharModal.onclick=()=>modal.close()
+
+btnWhats.onclick=()=>{
+
+window.open(
+"https://wa.me/557736135148",
+"_blank"
+)
+
+}
+
+/* HORÁRIOS */
+
+dataReserva.addEventListener("change",()=>{
+
+horaReserva.innerHTML='<option value="">Selecione</option>'
+
+const d=new Date(dataReserva.value)
+
+const dia=d.getDay()
+
+let h=[]
+
+if(dia>=1 && dia<=4){
+
+for(let i=11;i<=15;i++){
+h.push(i+":00",i+":30")
+}
+
+for(let i=17;i<=22;i++){
+h.push(i+":00",i+":30")
+}
+
+}
+
+if(dia==5||dia==6||dia==0){
+
+for(let i=11;i<=22;i++){
+h.push(i+":00",i+":30")
+}
+
+}
+
+h.forEach(t=>{
+
+const o=document.createElement("option")
+
+o.value=t
+o.textContent=t
+
+horaReserva.appendChild(o)
+
+})
+
+})
+
+/* TELEFONE */
+
+telefone.addEventListener("input",e=>{
+
+let v=e.target.value.replace(/\D/g,"")
+
+if(v.length>11)v=v.slice(0,11)
+
+v=v.replace(/^(\d{2})(\d)/,"($1) $2")
+
+v=v.replace(/(\d)(\d{4})$/,"$1-$2")
+
+e.target.value=v
+
+})
+
+/* TERMOS */
+
+abrirTermos.onclick=()=>modalTermos.showModal()
+
+/* ENVIO */
+
+formReserva.onsubmit=async e=>{
+
+e.preventDefault()
+
+if(!aceitarTermos.checked){
+
+alert("Você precisa aceitar os termos.")
+
+return
+
+}
+
+const f=new FormData(formReserva)
+
+const data=dataReserva.value
+const hora=horaReserva.value
+
+const datahora=data+"T"+hora
+
+const {error}=await supabaseClient
+.from("reservas_mercatto")
+.insert({
+
+nome:f.get("nome"),
+telefone:f.get("telefone"),
+pessoas:Number(f.get("pessoas")),
+datahora:datahora,
+
+area_externa:f.get("area"),
+comandas_individuais:f.get("comanda"),
+
+ocasiao:f.get("ocasiao"),
+decoracao:f.get("decoracao"),
+
+status:"Pendente",
+origem:"Site Reserva"
+
+})
+
+if(error){
+
+alert("Erro ao registrar reserva")
+
+return
+
+}
+
+alert("Reserva registrada!")
+
+modal.close()
+
+formReserva.reset()
+
+}
+
+</script>
+
+</body>
+</html>
