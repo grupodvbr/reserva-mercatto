@@ -235,6 +235,21 @@ body.modal-open{
 overflow:hidden;
 }
 
+
+.sound-toggle{
+position:absolute;
+top:14px;
+right:14px;
+background:rgba(0,0,0,.6);
+border:none;
+color:white;
+padding:10px 14px;
+border-radius:10px;
+font-weight:700;
+cursor:pointer;
+z-index:5;
+}
+  
 </style>
 </head>
 
@@ -244,11 +259,15 @@ overflow:hidden;
 
 <div class="hero">
 
-<video autoplay loop muted playsinline poster="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4">
+<video id="heroVideo" autoplay loop muted playsinline poster="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4">
 
 <source src="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4" type="video/mp4">
 
 </video>
+
+<button id="toggleSound" class="sound-toggle">
+🔇 Som
+</button>
 
 </div>
 
@@ -498,6 +517,21 @@ formReserva.reset()
 
 }
 
+
+/* CONTROLE SOM VIDEO */
+
+const video=document.getElementById("heroVideo")
+const btnSom=document.getElementById("toggleSound")
+
+btnSom.onclick=()=>{
+
+video.muted=!video.muted
+
+btnSom.innerText=video.muted
+? "🔇 Som"
+: "🔊 Som"
+
+}
 </script>
 
 </body>
