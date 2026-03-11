@@ -12,6 +12,8 @@ maximum-scale=1,
 user-scalable=no,
 viewport-fit=cover">
 
+<meta name="color-scheme" content="dark">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -239,7 +241,9 @@ font-weight:900;
 cursor:pointer;
 }
 
-body.modal-open{overflow:hidden}
+body.modal-open{
+overflow:hidden;
+}
 
 </style>
 </head>
@@ -251,7 +255,7 @@ body.modal-open{overflow:hidden}
 <div class="hero">
 
 <video id="heroVideo" autoplay loop muted playsinline>
-<source src="SEU_VIDEO.mp4" type="video/mp4">
+<source src="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4" type="video/mp4">
 </video>
 
 <button class="sound-btn" id="toggleSound">🔇 Som</button>
@@ -261,11 +265,11 @@ body.modal-open{overflow:hidden}
 <div class="actions">
 
 <button id="btnReservar" class="btn reservar">
-🗓️ Fazer Reserva
+Fazer Reserva
 </button>
 
 <button id="btnWhats" class="btn whatsapp">
-💬 WhatsApp
+WhatsApp
 </button>
 
 </div>
@@ -291,8 +295,8 @@ body.modal-open{overflow:hidden}
 
 <h2>Siga nosso Instagram</h2>
 
-<a href="https://instagram.com/mercattodelicia" target="_blank">
-📸 @mercattodelicia
+<a href="https://instagram.com/mercattodelicia_" target="_blank">
+📸 @mercattodelicia_
 </a>
 
 </div>
@@ -340,8 +344,8 @@ Reserva Mercatto Delícia
 <option>Comandas individuais</option>
 </select>
 
-<input name="ocasiao" placeholder="Ex: aniversário, jantar...">
-<input name="decoracao" placeholder="Ex: bolo, balões...">
+<input name="ocasiao" placeholder="Ex: aniversário, jantar romântico, reunião...">
+<input name="decoracao" placeholder="Ex: balões, bolo surpresa...">
 
 <label>
 <input type="checkbox" id="aceitarTermos">
