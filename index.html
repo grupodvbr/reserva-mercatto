@@ -605,10 +605,15 @@ formReserva.reset()
 
 
 /* CONTROLE SOM VIDEO */
-
 const video=document.getElementById("heroVideo")
 const btnSom=document.getElementById("toggleSound")
 
+video.play().catch(()=>{
+console.log("Autoplay bloqueado pelo navegador")
+})
+
+
+  
 btnSom.onclick=()=>{
 
 video.muted=!video.muted
