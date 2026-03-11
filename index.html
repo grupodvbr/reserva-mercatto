@@ -623,6 +623,18 @@ btnConfirmar.style.display="none"
 
 formReserva.addEventListener("input",validarForm)
 aceitarTermos.addEventListener("change",validarForm)
+
+function aceitarTermos(){
+
+aceitarTermosCheckbox = document.getElementById("aceitarTermos")
+
+aceitarTermosCheckbox.checked = true
+
+modalTermos.close()
+
+validarForm()
+
+}
 </script>
 
 </body>
