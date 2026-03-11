@@ -439,7 +439,7 @@ confetes de estouro, velas vulcão e similares.
 
 <br>
 
-<button onclick="aceitarTermos()" 
+<button onclick="confirmarTermos()"
 style="
 width:100%;
 padding:16px;
@@ -637,11 +637,11 @@ formReserva.addEventListener("input",validarForm)
 aceitarTermos.addEventListener("change",validarForm)
 dataReserva.addEventListener("change",validarForm)
 horaReserva.addEventListener("change",validarForm)
-function aceitarTermos(){
 
-aceitarTermosCheckbox = document.getElementById("aceitarTermos")
+  
+function confirmarTermos(){
 
-aceitarTermosCheckbox.checked = true
+aceitarTermos.checked = true
 
 modalTermos.close()
 
