@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 
 <title>Reservas • Mercatto Delícia</title>
@@ -14,313 +15,443 @@ viewport-fit=cover">
 
 <meta name="color-scheme" content="dark">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
+/* =========================
+   PALETA PREMIUM MADEIRA
+========================= */
+
 :root{
---bg:#070b14;
---card:#0f1625;
---line:#1f2937;
---text:#f1f5f9;
---muted:#94a3b8;
---brand:#22c55e;
---brand-dark:#16a34a;
---gold:#ffd700;
---radius:20px;
+
+--bg:#18120e;
+--wood:#2b1f18;
+--wood-soft:#35261e;
+
+--gold:#c9a66b;
+--gold-soft:#e4c791;
+
+--text:#f5f2ec;
+--muted:#b9a792;
+
+--radius:14px;
+
 }
 
-*{box-sizing:border-box}
+/* =========================
+   BASE
+========================= */
+
+*{
+box-sizing:border-box;
+}
 
 body{
+
 margin:0;
 font-family:Inter,sans-serif;
-background:radial-gradient(circle at top,#0f172a,#020617 70%);
+
+background:linear-gradient(
+180deg,
+#18120e,
+#100b08
+);
+
 color:var(--text);
+
 min-height:100vh;
-overflow-x:hidden;
+
 }
 
-/* HERO */
+/* =========================
+   HERO VIDEO
+========================= */
 
 header{
-padding:28px 16px;
+padding:26px 16px;
 }
 
 .hero{
-max-width:820px;
+
+max-width:900px;
 margin:auto;
-position:relative;
-border-radius:26px;
+
+border-radius:20px;
+
 overflow:hidden;
-box-shadow:0 40px 80px rgba(0,0,0,.8);
+
+position:relative;
+
+box-shadow:0 30px 70px rgba(0,0,0,.7);
+
 }
 
 .hero video{
+
 width:100%;
 height:100%;
 object-fit:cover;
 display:block;
+
 }
 
 .hero::after{
+
 content:"";
+
 position:absolute;
 inset:0;
-background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));
+
+background:linear-gradient(
+180deg,
+rgba(0,0,0,0),
+rgba(0,0,0,.55)
+);
+
 }
 
-/* BOTÃO SOM */
+/* =========================
+   BOTÃO SOM
+========================= */
 
 .sound-toggle{
+
 position:absolute;
-top:14px;
-right:14px;
-background:rgba(0,0,0,.6);
+top:12px;
+right:12px;
+
+background:rgba(0,0,0,.5);
+
 border:none;
+
 color:white;
-padding:10px 14px;
+
+padding:8px 12px;
+
 border-radius:10px;
-font-weight:700;
+
+font-size:12px;
+
 cursor:pointer;
-z-index:5;
+
 }
 
-/* BOTÕES */
+/* =========================
+   BOTÕES
+========================= */
 
 .actions{
-max-width:820px;
+
+max-width:900px;
 margin:22px auto;
+
 display:flex;
-gap:12px;
+gap:10px;
 flex-wrap:wrap;
+
 }
 
 .btn{
+
 flex:1;
-padding:16px;
-border-radius:16px;
-font-weight:800;
+
+padding:14px;
+
+border-radius:12px;
+
+font-weight:500;
+
 font-size:14px;
-border:1px solid var(--line);
-background:#111827;
-color:white;
+
+border:1px solid rgba(255,255,255,.06);
+
+background:var(--wood);
+
+color:var(--text);
+
 cursor:pointer;
+
 display:flex;
 justify-content:center;
 align-items:center;
-gap:8px;
+
 transition:.25s;
-box-shadow:0 8px 20px rgba(0,0,0,.5);
+
 }
 
 .btn:hover{
-transform:translateY(-3px);
-background:#1f2937;
+background:var(--wood-soft);
 }
 
-.btn.whatsapp{
-background:linear-gradient(180deg,var(--brand),var(--brand-dark));
-border:none;
-}
+/* RESERVA */
 
 .btn.reservar{
-background:linear-gradient(145deg,#ffd700,#ffb700,#ff8c00);
+
+background:linear-gradient(
+145deg,
+var(--gold),
+var(--gold-soft)
+);
+
+color:#3a2b22;
+
+font-weight:600;
+
 border:none;
-color:#2b1a00;
-font-weight:900;
-box-shadow:0 0 20px rgba(255,215,0,.5);
+
 }
+
+/* WHATSAPP */
+
+.btn.whatsapp{
+
+background:#214d3a;
+
+border:none;
+
+}
+
+/* INSTAGRAM */
 
 .btn.instagram{
-background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);
+
+background:#4a2d3a;
+
 border:none;
+
 }
 
-/* GALERIA */
+/* =========================
+   GALERIA
+========================= */
 
 .galeria{
-max-width:820px;
+
+max-width:900px;
+
 margin:40px auto;
+
 padding:0 16px;
-animation:fadeUp 1s ease;
+
 }
 
 .galeria h2{
-font-size:22px;
-font-weight:900;
-margin-bottom:20px;
+
+font-size:18px;
+
+font-weight:500;
+
+color:var(--gold);
+
+margin-bottom:16px;
+
 }
 
 .posts{
+
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
-gap:10px;
+
+gap:8px;
+
 }
 
 .posts img{
+
 width:100%;
+
 aspect-ratio:1/1;
+
 object-fit:cover;
-border-radius:12px;
-transition:.35s;
-cursor:pointer;
+
+border-radius:10px;
+
+transition:.3s;
+
 }
 
 .posts img:hover{
-transform:scale(1.08);
-box-shadow:0 20px 40px rgba(0,0,0,.6);
+
+transform:scale(1.04);
+
 }
 
+/* MOBILE */
+
 @media(max-width:600px){
+
 .posts{
 grid-template-columns:repeat(2,1fr);
 }
+
 }
 
-/* ANIMAÇÃO */
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(40px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 dialog{
-width:100%;
-max-width:620px;
-border:none;
-border-radius:26px;
-background:linear-gradient(180deg,#111827,#020617);
-color:white;
-overflow:hidden;
-box-shadow:0 60px 120px rgba(0,0,0,.9);
-animation:modal .25s ease;
-}
 
-@keyframes modal{
-from{transform:translateY(60px);opacity:0;}
-to{transform:translateY(0);opacity:1;}
+border:none;
+
+border-radius:18px;
+
+background:var(--wood);
+
+color:white;
+
+width:100%;
+max-width:520px;
+
+box-shadow:0 40px 120px rgba(0,0,0,.8);
+
 }
 
 dialog::backdrop{
-background:rgba(0,0,0,.8);
-backdrop-filter:blur(6px);
+
+background:rgba(0,0,0,.7);
+
 }
 
 .modal-head{
+
 display:flex;
 justify-content:space-between;
-align-items:center;
-padding:22px;
-border-bottom:1px solid var(--line);
-font-weight:900;
-font-size:16px;
+
+padding:18px;
+
+border-bottom:1px solid rgba(255,255,255,.06);
+
+font-weight:500;
+
 }
 
 .modal-body{
-padding:26px;
-max-height:80vh;
-overflow-y:auto;
+
+padding:22px;
+
 }
 
-.modal-body::-webkit-scrollbar{width:0}
-.modal-body{scrollbar-width:none}
+/* =========================
+   FORM
+========================= */
 
-/* FORM */
+form{
 
-form{display:grid;gap:18px}
+display:grid;
+
+gap:16px;
+
+}
 
 .row{
+
 display:grid;
+
 grid-template-columns:1fr 1fr;
-gap:14px;
+
+gap:10px;
+
 }
 
-@media(max-width:650px){
-.row{grid-template-columns:1fr}
+@media(max-width:600px){
+
+.row{
+grid-template-columns:1fr;
+}
+
 }
 
 label{
+
 font-size:12px;
-font-weight:800;
+
 color:var(--muted);
+
 }
 
 input,select{
-width:100%;
-padding:15px;
-border-radius:14px;
-border:1px solid var(--line);
-background:#020617;
-color:white;
-font-size:14px;
-}
 
-input::placeholder{
-color:#6b7280;
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid rgba(255,255,255,.08);
+
+background:#1a1410;
+
+color:white;
+
+font-size:14px;
+
 }
 
 input:focus,select:focus{
+
 outline:none;
-border-color:var(--brand);
-box-shadow:0 0 0 2px rgba(34,197,94,.25);
+
+border-color:var(--gold);
+
 }
 
 /* TERMOS */
 
 .termos{
+
 display:flex;
-gap:12px;
-font-size:13px;
-color:#cbd5f5;
-align-items:flex-start;
+
+gap:10px;
+
+font-size:12px;
+
+color:var(--muted);
+
 }
 
-.termos input{
-width:18px;
-height:18px;
-accent-color:var(--brand);
-cursor:pointer;
-}
-
-/* BOTÃO */
+/* BOTÃO SUBMIT */
 
 .submit{
-background:linear-gradient(180deg,var(--brand),var(--brand-dark));
+
+background:var(--gold);
+
 border:none;
-padding:18px;
-border-radius:16px;
-font-weight:900;
-font-size:16px;
+
+padding:14px;
+
+border-radius:12px;
+
+font-weight:600;
+
 cursor:pointer;
-box-shadow:0 12px 30px rgba(0,0,0,.6);
+
+color:#3a2b22;
+
 }
 
-body.modal-open{
-overflow:hidden;
-}
-
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-margin-top:60px;
-text-align:center;
+
+margin-top:50px;
+
 padding:30px;
-color:#94a3b8;
+
+text-align:center;
+
 font-size:13px;
+
+color:var(--muted);
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -336,7 +467,7 @@ font-size:13px;
 </video>
 
 <button id="toggleSound" class="sound-toggle">
-🔇 Som
+Som
 </button>
 
 </div>
@@ -344,15 +475,15 @@ font-size:13px;
 <div class="actions">
 
 <button id="btnReservar" class="btn reservar">
-🗓️ Fazer Reserva
+Reservar
 </button>
 
 <button id="btnWhats" class="btn whatsapp">
-💬 WhatsApp
+WhatsApp
 </button>
 
 <button onclick="window.open('https://instagram.com/mercattodelicia','_blank')" class="btn instagram">
-📸 Instagram
+Instagram
 </button>
 
 </div>
@@ -361,16 +492,21 @@ font-size:13px;
 
 <section class="galeria">
 
-<h2>🍝 Experiências no Mercatto</h2>
+<h2>Momentos no Mercatto</h2>
 
 <div class="posts">
 
 <img src="https://images.unsplash.com/photo-1544025162-d76694265947">
-<img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141">
+
 <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836">
+
+<img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141">
+
 <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
-<img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5">
+
 <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1">
+
+<img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5">
 
 </div>
 
@@ -378,11 +514,13 @@ font-size:13px;
 
 <footer>
 
-Mercatto Delícia • Reservas Online  
+Mercatto Delícia  
 Avenida Rui Barbosa 1264  
-📞 (77) 3613-5148  
+Reservas: (77) 3613-5148
 
 </footer>
+
+<!-- MODAL RESERVA -->
 
 <dialog id="modalReserva">
 
@@ -396,20 +534,20 @@ Reserva Mercatto Delícia
 <form id="formReserva">
 
 <label>Nome</label>
-<input name="nome" required placeholder="Ex: João Silva">
+<input name="nome" required>
 
 <label>Contato</label>
-<input id="telefone" name="telefone" required placeholder="Ex: (77) 9 9999-9999">
+<input id="telefone" name="telefone" required>
 
 <div class="row">
 
 <div>
-<label>Nº de Pessoas</label>
-<input type="number" name="pessoas" min="1" required placeholder="Ex: 4">
+<label>Pessoas</label>
+<input type="number" name="pessoas" required>
 </div>
 
 <div>
-<label>Área Externa (Fora)</label>
+<label>Área Externa</label>
 <select name="area">
 <option>Não</option>
 <option>Sim</option>
@@ -432,22 +570,8 @@ Reserva Mercatto Delícia
 
 </div>
 
-<div class="row">
-
-<div>
-<label>Comandas Individuais</label>
-<select name="comanda">
-<option>Não</option>
-<option>Sim</option>
-</select>
-</div>
-
-<div>
 <label>Ocasião</label>
-<input name="ocasiao" placeholder="Ex: Aniversário, jantar romântico...">
-</div>
-
-</div>
+<input name="ocasiao">
 
 <label>Decoração</label>
 <input name="decoracao">
@@ -458,7 +582,9 @@ Reserva Mercatto Delícia
 
 <span>
 Li e concordo com os
-<button type="button" id="abrirTermos">Termos da Reserva</button>
+<button type="button" id="abrirTermos">
+Termos
+</button>
 </span>
 
 </div>
@@ -473,25 +599,30 @@ Confirmar Reserva
 
 </dialog>
 
+<!-- MODAL TERMOS -->
+
 <dialog id="modalTermos">
 
 <div class="modal-head">
-📜 Termos da Reserva
+Termos da Reserva
 <button onclick="modalTermos.close()">Fechar</button>
 </div>
 
 <div class="modal-body">
 
-<p>• A reserva será mantida por até <b>20 minutos</b> após o horário.</p>
-<p>• Após esse período a mesa pode ser liberada.</p>
-<p>• Taxa de serviço de <b>10%</b> aplicada.</p>
-<p>• Não é permitido confete, vela vulcão ou itens perigosos.</p>
+<p>• Reserva mantida por até 20 minutos após horário.</p>
+
+<p>• Taxa de serviço de 10% aplicada.</p>
+
+<p>• Não é permitido confete ou itens perigosos.</p>
 
 </div>
 
 </dialog>
 
 <script>
+
+/* SUPABASE */
 
 const SUPABASE_URL="https://dxkszikemntfusfyrzos.supabase.co"
 const SUPABASE_KEY="sb_publishable_NNFvdfSXgOdGGVcSbphbjQ_brC3_9ed"
@@ -502,12 +633,10 @@ const modal=document.getElementById("modalReserva")
 
 btnReservar.onclick=()=>{
 modal.showModal()
-document.body.classList.add("modal-open")
 }
 
 fecharModal.onclick=()=>{
 modal.close()
-document.body.classList.remove("modal-open")
 }
 
 btnWhats.onclick=()=>{
@@ -590,7 +719,7 @@ telefone:f.get("telefone"),
 pessoas:Number(f.get("pessoas")),
 mesa:f.get("area")==="Sim"?"Área Externa":"Salão",
 cardapio:"",
-comandaIndividual:f.get("comanda"),
+comandaIndividual:"Não",
 datahora:datahora,
 observacoes:
 "Ocasião: "+(f.get("ocasiao")||"—")+
@@ -603,14 +732,16 @@ status:"Pendente"
 })
 
 if(error){
+
 alert("Erro ao registrar reserva")
+
 return
+
 }
 
 alert("Reserva registrada!")
 
 modal.close()
-document.body.classList.remove("modal-open")
 
 formReserva.reset()
 
@@ -619,6 +750,7 @@ formReserva.reset()
 /* SOM VIDEO */
 
 const video=document.getElementById("heroVideo")
+
 const btnSom=document.getElementById("toggleSound")
 
 btnSom.onclick=()=>{
@@ -626,8 +758,8 @@ btnSom.onclick=()=>{
 video.muted=!video.muted
 
 btnSom.innerText=video.muted
-? "🔇 Som"
-: "🔊 Som"
+? "Som"
+: "Mudo"
 
 }
 
