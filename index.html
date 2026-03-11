@@ -466,7 +466,19 @@ const SUPABASE_KEY="sb_publishable_NNFvdfSXgOdGGVcSbphbjQ_brC3_9ed"
 const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
 
 const modal=document.getElementById("modalReserva")
+const btnReservar = document.getElementById("btnReservar")
+const btnWhats = document.getElementById("btnWhats")
+const fecharModal = document.getElementById("fecharModal")
 
+const dataReserva = document.getElementById("dataReserva")
+const horaReserva = document.getElementById("horaReserva")
+
+const telefone = document.getElementById("telefone")
+const formReserva = document.getElementById("formReserva")
+
+const aceitarTermos = document.getElementById("aceitarTermos")
+const abrirTermos = document.getElementById("abrirTermos")
+const modalTermos = document.getElementById("modalTermos")
 btnReservar.onclick=()=>{
 modal.showModal()
 document.body.classList.add("modal-open")
@@ -607,13 +619,13 @@ const btnConfirmar = document.getElementById("btnConfirmar")
 function validarForm(){
 
 const nome = formReserva.nome.value.trim()
-const tel = formReserva.telefone.value.trim()
+const tel = formReserva.telefone.value.replace(/\D/g,"")
 const pessoas = formReserva.pessoas.value
 const data = dataReserva.value
 const hora = horaReserva.value
 const termos = aceitarTermos.checked
 
-if(nome && tel.length >= 14 && pessoas && data && hora && termos){
+if(nome && tel.length >= 10 && pessoas && data && hora && termos){
 btnConfirmar.style.display="block"
 }else{
 btnConfirmar.style.display="none"
