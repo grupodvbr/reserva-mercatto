@@ -72,6 +72,22 @@ inset:0;
 background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));
 }
 
+/* BOTÃO SOM */
+
+.sound-toggle{
+position:absolute;
+top:14px;
+right:14px;
+background:rgba(0,0,0,.6);
+border:none;
+color:white;
+padding:10px 14px;
+border-radius:10px;
+font-weight:700;
+cursor:pointer;
+z-index:5;
+}
+
 /* BOTÕES */
 
 .actions{
@@ -96,12 +112,12 @@ display:flex;
 justify-content:center;
 align-items:center;
 gap:8px;
-transition:.2s;
+transition:.25s;
 box-shadow:0 8px 20px rgba(0,0,0,.5);
 }
 
 .btn:hover{
-transform:translateY(-2px);
+transform:translateY(-3px);
 background:#1f2937;
 }
 
@@ -116,6 +132,65 @@ border:none;
 color:#2b1a00;
 font-weight:900;
 box-shadow:0 0 20px rgba(255,215,0,.5);
+}
+
+.btn.instagram{
+background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);
+border:none;
+}
+
+/* GALERIA */
+
+.galeria{
+max-width:820px;
+margin:40px auto;
+padding:0 16px;
+animation:fadeUp 1s ease;
+}
+
+.galeria h2{
+font-size:22px;
+font-weight:900;
+margin-bottom:20px;
+}
+
+.posts{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.posts img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:12px;
+transition:.35s;
+cursor:pointer;
+}
+
+.posts img:hover{
+transform:scale(1.08);
+box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+
+@media(max-width:600px){
+.posts{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+/* ANIMAÇÃO */
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 /* MODAL */
@@ -235,21 +310,16 @@ body.modal-open{
 overflow:hidden;
 }
 
+/* FOOTER */
 
-.sound-toggle{
-position:absolute;
-top:14px;
-right:14px;
-background:rgba(0,0,0,.6);
-border:none;
-color:white;
-padding:10px 14px;
-border-radius:10px;
-font-weight:700;
-cursor:pointer;
-z-index:5;
+footer{
+margin-top:60px;
+text-align:center;
+padding:30px;
+color:#94a3b8;
+font-size:13px;
 }
-  
+
 </style>
 </head>
 
@@ -259,7 +329,7 @@ z-index:5;
 
 <div class="hero">
 
-<video id="heroVideo" autoplay loop muted playsinline poster="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4">
+<video id="heroVideo" autoplay loop muted playsinline>
 
 <source src="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4" type="video/mp4">
 
@@ -281,9 +351,38 @@ z-index:5;
 💬 WhatsApp
 </button>
 
+<button onclick="window.open('https://instagram.com/mercattodelicia','_blank')" class="btn instagram">
+📸 Instagram
+</button>
+
 </div>
 
 </header>
+
+<section class="galeria">
+
+<h2>🍝 Experiências no Mercatto</h2>
+
+<div class="posts">
+
+<img src="https://images.unsplash.com/photo-1544025162-d76694265947">
+<img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141">
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5">
+<img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1">
+
+</div>
+
+</section>
+
+<footer>
+
+Mercatto Delícia • Reservas Online  
+Avenida Rui Barbosa 1264  
+📞 (77) 3613-5148  
+
+</footer>
 
 <dialog id="modalReserva">
 
@@ -345,13 +444,13 @@ Reserva Mercatto Delícia
 
 <div>
 <label>Ocasião</label>
-<input name="ocasiao" placeholder="Ex: Aniversário, jantar romântico, reunião...">
+<input name="ocasiao" placeholder="Ex: Aniversário, jantar romântico...">
 </div>
 
 </div>
 
 <label>Decoração</label>
-<input name="decoracao" placeholder="Ex: Balões, bolo surpresa...">
+<input name="decoracao">
 
 <div class="termos">
 
@@ -517,8 +616,7 @@ formReserva.reset()
 
 }
 
-
-/* CONTROLE SOM VIDEO */
+/* SOM VIDEO */
 
 const video=document.getElementById("heroVideo")
 const btnSom=document.getElementById("toggleSound")
@@ -532,6 +630,7 @@ btnSom.innerText=video.muted
 : "🔊 Som"
 
 }
+
 </script>
 
 </body>
