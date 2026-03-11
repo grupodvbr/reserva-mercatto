@@ -310,14 +310,24 @@ Reserva Mercatto Delícia
 <input name="nome" required placeholder="Ex: João Silva">
 
 <label>Contato</label>
-<input id="telefone" name="telefone" required placeholder="Ex: (77) 9 9999-9999">
-
+<input
+id="telefone"
+name="telefone"
+required
+inputmode="numeric"
+pattern="[0-9]*"
+placeholder="(77) 9 9999-9999">
 <div class="row">
 
 <div>
 <label>Nº de Pessoas</label>
-<input type="number" name="pessoas" min="1" required placeholder="Ex: 4">
-</div>
+<input
+type="number"
+inputmode="numeric"
+name="pessoas"
+min="1"
+required
+placeholder="Ex: 4"></div>
 
 <div>
 <label>Área Externa (Fora)</label>
@@ -374,7 +384,7 @@ Li e concordo com os
 
 </div>
 
-<button class="submit" style="position:sticky;bottom:0;">
+<button id="btnConfirmar" class="submit" style="display:none;">
 Confirmar Reserva
 </button>
 </form>
@@ -461,8 +471,11 @@ let v=e.target.value.replace(/\D/g,"")
 
 if(v.length>11)v=v.slice(0,11)
 
-v=v.replace(/^(\d{2})(\d)/,"($1) $2")
-v=v.replace(/(\d)(\d{4})$/,"$1-$2")
+if(v.length>6){
+v=v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,"($1) $2-$3")
+}else if(v.length>2){
+v=v.replace(/^(\d{2})(\d+)/,"($1) $2")
+}
 
 e.target.value=v
 
@@ -541,6 +554,28 @@ btnSom.innerText=video.muted
 : "🔊 Som"
 
 }
+
+const btnConfirmar = document.getElementById("btnConfirmar")
+
+function validarForm(){
+
+const nome = formReserva.nome.value.trim()
+const tel = formReserva.telefone.value.trim()
+const pessoas = formReserva.pessoas.value
+const data = dataReserva.value
+const hora = horaReserva.value
+const termos = aceitarTermos.checked
+
+if(nome && tel.length >= 14 && pessoas && data && hora && termos){
+btnConfirmar.style.display="block"
+}else{
+btnConfirmar.style.display="none"
+}
+
+}
+
+formReserva.addEventListener("input",validarForm)
+aceitarTermos.addEventListener("change",validarForm)
 </script>
 
 </body>
