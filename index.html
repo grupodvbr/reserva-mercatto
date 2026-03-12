@@ -380,7 +380,101 @@ font-weight:700;
 cursor:pointer;
 z-index:5;
 }
-  
+  /* ================= OVERLAY LOADING ================= */
+
+.overlay-loading{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+backdrop-filter:blur(6px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+flex-direction:column;
+gap:20px;
+}
+
+.loader{
+width:60px;
+height:60px;
+border:5px solid rgba(255,255,255,.2);
+border-top:5px solid #22c55e;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+.overlay-loading span{
+font-weight:700;
+letter-spacing:1px;
+color:#fff;
+}
+
+/* ================= CONFIRMAÇÃO BONITA ================= */
+
+.confirmacao{
+position:fixed;
+inset:0;
+background:linear-gradient(180deg,#020617,#000);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+padding:20px;
+}
+
+.confirm-card{
+
+background:linear-gradient(180deg,#111827,#020617);
+
+border:1px solid #1f2937;
+
+border-radius:22px;
+
+padding:30px;
+
+max-width:500px;
+
+width:100%;
+
+text-align:center;
+
+box-shadow:0 40px 80px rgba(0,0,0,.9);
+
+display:grid;
+
+gap:16px;
+
+}
+
+.confirm-card h2{
+color:#22c55e;
+margin:0;
+}
+
+.confirm-card .resumo{
+background:#020617;
+padding:18px;
+border-radius:14px;
+border:1px solid #1f2937;
+font-size:14px;
+text-align:left;
+line-height:1.5;
+}
+
+.confirm-card button{
+margin-top:10px;
+background:#22c55e;
+border:none;
+padding:14px;
+border-radius:14px;
+font-weight:800;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -671,7 +765,7 @@ abrirTermos.onclick=()=>modalTermos.showModal()
 
 /* ENVIO */
 
-formReserva.onsubmit=async e=>{
+formReserva.onsubmit = async e => {
 
 e.preventDefault()
 
@@ -680,43 +774,88 @@ alert("Você precisa aceitar os termos.")
 return
 }
 
-const f=new FormData(formReserva)
+/* MOSTRA OVERLAY */
 
-const data=dataReserva.value
-const hora=horaReserva.value
+const overlay = document.getElementById("overlayLoading")
+overlay.style.display="flex"
 
-const datahora=data+"T"+hora
+const f = new FormData(formReserva)
 
-const {error}=await supabaseClient
+const nome = f.get("nome")
+const telefone = f.get("telefone")
+const pessoas = f.get("pessoas")
+const area = f.get("area")
+const comanda = f.get("comanda")
+const ocasiao = f.get("ocasiao")
+const decoracao = f.get("decoracao")
+
+const data = dataReserva.value
+const hora = horaReserva.value
+const datahora = data + "T" + hora
+
+const {error} = await supabaseClient
 .from("reservas_mercatto")
 .insert({
 
-nome:f.get("nome"),
-email:"",
-telefone:f.get("telefone"),
-pessoas:Number(f.get("pessoas")),
-mesa:f.get("area")==="Sim"?"Área Externa":"Salão",
+nome:nome,
+
+email:"linkbio@gmail.com",
+
+telefone:telefone,
+
+pessoas:Number(pessoas),
+
+mesa:area==="Sim" ? "Área Externa" : "Salão",
+
 cardapio:"",
-comandaIndividual:f.get("comanda"),
+
+comandaIndividual:comanda,
+
 datahora:datahora,
+
 observacoes:
-"Ocasião: "+(f.get("ocasiao")||"—")+
-" | Decoração: "+(f.get("decoracao")||"—"),
+"Ocasião: " + (ocasiao || "—") +
+" | Decoração: " + (decoracao || "—"),
+
 valorEstimado:0,
+
 pagamentoAntecipado:0,
+
 banco:"",
+
 status:"Pendente"
 
 })
 
+overlay.style.display="none"
+
 if(error){
+
 alert("Erro ao registrar reserva")
+
 return
+
 }
 
-alert("Reserva registrada!")
+/* RESUMO BONITO */
+
+const resumo = document.getElementById("resumoReserva")
+
+resumo.innerHTML = `
+<b>Nome:</b> ${nome}<br>
+<b>Telefone:</b> ${telefone}<br>
+<b>Pessoas:</b> ${pessoas}<br>
+<b>Data:</b> ${data}<br>
+<b>Hora:</b> ${hora}<br>
+<b>Área:</b> ${area}<br>
+<b>Comandas Individuais:</b> ${comanda}<br>
+<b>Ocasião:</b> ${ocasiao || "—"}
+`
+
+document.getElementById("confirmacao").style.display="flex"
 
 modal.close()
+
 document.body.classList.remove("modal-open")
 
 formReserva.reset()
@@ -779,6 +918,37 @@ validarForm()
 
 }
 </script>
+<!-- OVERLAY LOADING -->
 
+<div id="overlayLoading" class="overlay-loading">
+
+<div class="loader"></div>
+
+<span>Registrando sua reserva...</span>
+
+</div>
+
+<!-- CONFIRMAÇÃO -->
+
+<div id="confirmacao" class="confirmacao">
+
+<div class="confirm-card">
+
+<h2>✅ Reserva Solicitada</h2>
+
+<p>
+Recebemos sua reserva.<br>
+A equipe do Mercatto irá confirmar em breve.
+</p>
+
+<div class="resumo" id="resumoReserva"></div>
+
+<button onclick="location.reload()">
+Fechar
+</button>
+
+</div>
+
+</div>
 </body>
 </html>
