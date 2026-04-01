@@ -258,8 +258,14 @@ animation:modal .25s ease;
 }
 
 @keyframes modal{
-from{transform:translateY(60px);opacity:0;}
-to{transform:translateY(0);opacity:1;}
+from{
+transform:translateY(20px) scale(.98);
+opacity:0;
+}
+to{
+transform:translateY(0) scale(1);
+opacity:1;
+}
 }
 
 dialog::backdrop{
@@ -314,7 +320,7 @@ border-radius:14px;
 border:1px solid var(--line);
 background:#020617;
 color:white;
-font-size:14px;
+font-size:16px;
 }
 
 input::placeholder{
@@ -474,6 +480,11 @@ padding:14px;
 border-radius:14px;
 font-weight:800;
 cursor:pointer;
+}
+
+dialog{
+will-change:transform;
+backface-visibility:hidden;
 }
 </style>
 </head>
