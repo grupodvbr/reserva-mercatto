@@ -246,24 +246,39 @@ left:140%;
 /* MODAL */
 
 dialog{
+position:fixed;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%) scale(1);
+
 width:100%;
 max-width:620px;
+margin:0;
+
 border:none;
 border-radius:26px;
+
 background:linear-gradient(180deg,#111827,#020617);
 color:white;
+
 overflow:hidden;
+
 box-shadow:0 60px 120px rgba(0,0,0,.9);
+
 animation:modal .25s ease;
+
+will-change:transform;
+backface-visibility:hidden;
 }
 
 @keyframes modal{
 from{
-transform:translateY(20px) scale(.98);
+transform:translate(-50%,-40%) scale(.96);
 opacity:0;
 }
 to{
-transform:translateY(0) scale(1);
+transform:translate(-50%,-50%) scale(1);
 opacity:1;
 }
 }
