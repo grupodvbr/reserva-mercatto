@@ -297,8 +297,11 @@ font-size:16px;
 
 .modal-body{
   padding:18px;
-  height:calc(100dvh - 70px); /* ajusta pelo header */
-  overflow:hidden;
+  height:calc(100dvh - 70px);
+  overflow-y:auto;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 
   display:flex;
   flex-direction:column;
@@ -313,7 +316,6 @@ form{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
-  overflow:hidden;
 }
 .row{
 display:grid;
@@ -514,7 +516,7 @@ backface-visibility:hidden;
 }
 
 html,body{
-  overscroll-behavior:none;
+  overscroll-behavior:auto;
 }
 
 
