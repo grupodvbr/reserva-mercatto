@@ -296,16 +296,12 @@ font-size:16px;
 }
 
 .modal-body{
-  padding:26px;
+  padding:18px;
+  height:calc(100dvh - 70px); /* ajusta pelo header */
+  overflow:hidden;
 
-  /* 🔥 TROCA PRINCIPAL */
-  max-height:100dvh;
-
-  overflow-y:auto;
-  padding-bottom:120px;
-
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
+  display:flex;
+  flex-direction:column;
 }
 
 .modal-body::-webkit-scrollbar{width:0}
@@ -313,8 +309,12 @@ font-size:16px;
 
 /* FORM */
 
-form{display:grid;gap:18px}
-
+form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  overflow:hidden;
+}
 .row{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -326,14 +326,16 @@ gap:14px;
 }
 
 label{
-font-size:12px;
+  font-size:11px;
+  margin-bottom:2px;
 font-weight:800;
 color:var(--muted);
 }
 
 input,select{
   width:100%;
-  padding:15px;
+  padding:12px;
+  height:44px;
   border-radius:14px;
   border:1px solid var(--line);
   background:#020617;
@@ -514,6 +516,26 @@ backface-visibility:hidden;
 html,body{
   overscroll-behavior:none;
 }
+
+
+form > label{
+  grid-column: span 2;
+}
+
+form > input,
+form > select{
+  grid-column: span 2;
+}
+
+.row{
+  grid-column: span 2;
+}
+
+
+
+
+
+  
 </style>
 </head>
 
