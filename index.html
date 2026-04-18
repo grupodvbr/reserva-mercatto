@@ -543,38 +543,6 @@ form > select{
 
 <body>
 
-<header>
-
-<div class="hero">
-
-<video id="heroVideo" autoplay loop muted playsinline preload="auto">
-
-<source src="https://dxkszikemntfusfyrzos.supabase.co/storage/v1/object/public/MERCATTO/WhatsApp%20Video%202026-03-10%20at%2021.08.40.mp4" type="video/mp4">
-
-</video>
-
-<button id="toggleSound" class="sound-toggle">
-🔇 Som
-</button>
-
-</div>
-
-<div class="actions">
-
-<button id="btnReservar" class="btn reservar">
-Fazer Reserva
-</button>
-
-<button id="btnWhats" class="btn whatsapp">
-WhatsApp
-</button>
-
-</div>
-
-<div class="frase-romantica">
-"Sabores que transformam encontros em momentos inesquecíveis."
-</div>
-
 </header>
 
 <dialog id="modalReserva">
@@ -598,56 +566,58 @@ name="telefone"
 required
 inputmode="numeric"
 placeholder="(77) 9 9999-9999">
-<div class="row">
-
-<div>
-<label>Nº de Pessoas</label>
-<input
-type="number"
-inputmode="numeric"
-name="pessoas"
-min="1"
-required
-placeholder="Ex: 4"></div>
-
-<div>
-<label>Área Externa (Fora)</label>
-<select name="area">
-<option>Não</option>
-<option>Sim</option>
-</select>
-</div>
-
-</div>
 
 <div class="row">
 
-<div>
-<label>Data</label>
-<input type="date" id="dataReserva" required>
-</div>
+  <div>
+    <label>Nº de Pessoas</label>
+    <input
+    type="number"
+    inputmode="numeric"
+    name="pessoas"
+    min="1"
+    required
+    placeholder="Ex: 4">
+  </div>
 
-<div>
-<label>Horário</label>
-<select id="horaReserva" required></select>
-</div>
+  <div>
+    <label>Comandas Individuais</label>
+    <select name="comanda">
+      <option>Não</option>
+      <option>Sim</option>
+    </select>
+  </div>
 
 </div>
 
 <div class="row">
 
-<div>
-<label>Comandas Individuais</label>
-<select name="comanda">
-<option>Não</option>
-<option>Sim</option>
-</select>
+  <div>
+    <label>Data</label>
+    <input type="date" id="dataReserva" required>
+  </div>
+
+  <div>
+    <label>Área Externa (Fora)</label>
+    <select name="area">
+      <option>Não</option>
+      <option>Sim</option>
+    </select>
+  </div>
+
 </div>
 
-<div>
-<label>Ocasião</label>
-<input name="ocasiao" placeholder="Ex: Aniversário, confreternização, reunião...">
-</div>
+<div class="row">
+
+  <div>
+    <label>Horário</label>
+    <select id="horaReserva" required></select>
+  </div>
+
+  <div>
+    <label>Ocasião</label>
+    <input name="ocasiao" placeholder="Ex: Aniversário, confraternização...">
+  </div>
 
 </div>
 
@@ -668,10 +638,10 @@ Li e concordo com os
 <button id="btnConfirmar" class="submit" style="display:none;">
 Confirmar Reserva
 </button>
+
 </form>
 
 </div>
-
 </dialog>
 
 <dialog id="modalTermos">
