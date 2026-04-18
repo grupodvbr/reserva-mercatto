@@ -313,13 +313,48 @@ padding-bottom:120px;
 form{display:grid;gap:18px}
 
 .row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:12px;
+  align-items:end;
 }
 
+/* estrutura interna dos campos */
+.row > div{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* PADRÃO VISUAL PROFISSIONAL */
+input, select{
+  width:100%;
+  height:52px;
+  padding:0 14px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:#020617;
+  color:white;
+  font-size:15px;
+  box-sizing:border-box;
+}
+
+/* MOBILE AJUSTADO */
 @media(max-width:650px){
-.row{grid-template-columns:1fr}
+
+  .modal-body{
+    padding:20px;
+  }
+
+  form{
+    gap:14px;
+  }
+
+  .row{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
 }
 
 label{
@@ -328,15 +363,6 @@ font-weight:800;
 color:var(--muted);
 }
 
-input,select{
-width:100%;
-padding:15px;
-border-radius:14px;
-border:1px solid var(--line);
-background:#020617;
-color:white;
-font-size:16px;
-}
 
 input::placeholder{
 color:#6b7280;
@@ -501,6 +527,30 @@ dialog{
 will-change:transform;
 backface-visibility:hidden;
 }
+
+/* CORRIGE INPUT DATE (ANDROID / IOS) */
+input[type="date"]{
+  appearance:none;
+  -webkit-appearance:none;
+  height:52px;
+  padding:0 12px;
+  font-size:15px;
+}
+
+/* REMOVE ÍCONE EXAGERADO DO CALENDÁRIO */
+input[type="date"]::-webkit-calendar-picker-indicator{
+  opacity:0.7;
+  transform:scale(0.9);
+}
+
+/* GARANTE QUE NÃO ESTOURE A COLUNA */
+.row > div{
+  min-width:0;
+}
+
+
+
+  
 </style>
 </head>
 
@@ -960,11 +1010,11 @@ validarForm()
 
 <div class="confirm-card">
 
-<h2>✅ Reserva Solicitada</h2>
+<h2>✅ Reserva registrada</h2>
 
 <p>
 Recebemos sua reserva.<br>
-A equipe do Mercatto irá confirmar em breve.
+Obrigado por escolher o Mercatto Delícia, estaremos esperando por voês, até breve.
 </p>
 
 <div class="resumo" id="resumoReserva"></div>
