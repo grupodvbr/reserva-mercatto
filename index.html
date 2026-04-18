@@ -246,11 +246,10 @@ left:140%;
 /* MODAL */
 
 dialog{
-position:fixed;
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%) scale(1);
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate3d(-50%,-50%,0);
 
 width:100%;
 max-width:620px;
@@ -273,14 +272,14 @@ backface-visibility:hidden;
 }
 
 @keyframes modal{
-from{
-transform:translate(-50%,-40%) scale(.96);
-opacity:0;
-}
-to{
-transform:translate(-50%,-50%) scale(1);
-opacity:1;
-}
+  from{
+    transform:translate3d(-50%,-40%,0);
+    opacity:0;
+  }
+  to{
+    transform:translate3d(-50%,-50%,0);
+    opacity:1;
+  }
 }
 
 dialog::backdrop{
@@ -299,10 +298,14 @@ font-size:16px;
 }
 
 .modal-body{
-padding:26px;
-max-height:70vh;
-overflow-y:auto;
-padding-bottom:120px;
+  padding:26px;
+  max-height:70vh;
+  overflow-y:auto;
+  padding-bottom:120px;
+
+  /* 🔥 CORREÇÃO DO BALANÇO */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-body::-webkit-scrollbar{width:0}
@@ -384,7 +387,9 @@ text-align:center;
 }
 
 body.modal-open{
-overflow:hidden;
+  overflow:hidden;
+  position:fixed;
+  width:100%;
 }
 
 
